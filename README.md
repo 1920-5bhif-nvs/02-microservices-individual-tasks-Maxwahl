@@ -1,5 +1,61 @@
 # 02-microservices-individual-tasks-Maxwahl
 
+## Documentation - Librarian
+
+The Librarian is a microservice that wraps the microservice of exercise 1 and provides an API to make ReST-calls to the Library (Exercise 1).
+It uses the Quarkus-Smallrye ReST-Client and has built in Metrics,Health and Fault Tolerance.
+
+## Examples
+
+### Metrics
+
+```java
+    @Counted(name = "performedChecks", description = "How many rest requests have been performed.")
+```
+
+This Metric counts the amount of times a certain method gets called.
+
+### Fault Tolerance
+
+Fault Tolerance in general describes expected behaviour in and the conditions of false or exceptional states
+
+```java
+    @Fallback(fallbackMethod = "noLoans")
+```
+
+This annotation describes the method that should be called if an error occurs during execution of the annotated method
+
+```java
+    @CircuitBreaker(failureRatio = 0.75,requestVolumeThreshold = 4,delay = 1,delayUnit = ChronoUnit.SECONDS)
+```
+
+This annotation describes when a method call is broken and should be reevaluated.
+If 75% of 4 calls fail, the microservice should wait 1 second before calling this method again
+
+## Running
+
+### Opening the Library
+
+In order to open the Library you have to:
+
+1. Have a running a PostgreSQL docker-container with:
+    * name librarydatasource
+    * port 5432
+    * database name library
+    * username library
+    * password passme
+2. Build and run the Library:
+    * buildlibrary.sh
+    * runlibrary.sh
+
+### Employing a Librarian
+
+In order to employ the Librarian you have to:
+
+1. Build and run the Librarian:
+    * buildlibrarian.sh
+    * runlibrarian.sh
+
 ## Maintaining and Managing Multiple Microservices
 
 ### Prometheus
