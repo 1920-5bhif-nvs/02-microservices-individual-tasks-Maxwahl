@@ -49,6 +49,15 @@ public class Librarian {
     }
 
     @GET
+    @Path("/loans/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response loan(@PathParam("id")long id){
+        return Response.ok().entity(loanWrapperResource.getLoan(id)).build();
+    }
+
+
+
+    @GET
     @Path("/persons")
     @Produces(MediaType.APPLICATION_JSON)
     @Bulkhead(value = 2,waitingTaskQueue = 8)
@@ -57,14 +66,21 @@ public class Librarian {
     }
 
     @GET
-    @Path("/persons/{id}")
+    @Path("/demo/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @CircuitBreaker(failureRatio = 0.75,requestVolumeThreshold = 4,delay = 1,delayUnit = ChronoUnit.SECONDS)
-    public  Response persons(@PathParam("id")long id){
+    public  Response jitterdemo(@PathParam("id")long id){
         int number = random.nextInt(3);
         if(number == 0){
             throw new RuntimeException("jitter error");
         }
+        return  Response.ok().entity(personWrapperResource.getPerson(id)).build();
+    }
+
+    @GET
+    @Path("/persons/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public  Response persons(@PathParam("id")long id){
         return  Response.ok().entity(personWrapperResource.getPerson(id)).build();
     }
 
