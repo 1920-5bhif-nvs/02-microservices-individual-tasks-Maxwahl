@@ -10,8 +10,6 @@ import static org.hamcrest.CoreMatchers.is;
 @QuarkusTest
 public class ExampleResourceTest {
     //Same tests as in exercise 1, as this is a wrapper for it and therefore it should do the same
-    //should only be run when not compiling for docker, otherwise would always fail because of network name of datasource
-
     @Test
     public void testLoansSize() {
         given()
