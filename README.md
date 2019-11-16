@@ -38,15 +38,9 @@ If 75% of 4 calls fail, the microservice should wait 1 second before calling thi
 
 In order to open the Library you have to:
 
-1. Have a running a PostgreSQL docker-container with:
-    * name librarydatasource
-    * port 5432
-    * database name library
-    * username library
-    * password passme
-2. Build and run the Library:
-    * buildlibrary.sh
-    * runlibrary.sh
+Follow the instructions provided here:
+
+<a href="https://github.com/1920-5bhif-nvs/01-assignment-quarkus-jpa-Maxwahl#running-the-project">Exercise 1</a>
 
 ### Employing a Librarian
 
